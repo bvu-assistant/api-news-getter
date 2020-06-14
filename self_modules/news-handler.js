@@ -6,16 +6,22 @@ const cheerio = require('cheerio');
 
 
 //  Tin chính
-async function scrapHeadlines()
+async function scrapHeadlines(pageIndex)
 {
     try
     {
+        // console.log('\nGetting headlines...');
+        
         return new Promise((resolve, reject) =>
         {
             request({
                 method: 'GET',
                 strictSSL: false,
-                url: 'https://sinhvien.bvu.edu.vn/'
+                url: 'https://sinhvien.bvu.edu.vn/News.aspx',
+                qs: {
+                    MenuID: 371,
+                    CurrentPage: pageIndex
+                }
             },
             (err, res, body) =>
             {
@@ -28,10 +34,11 @@ async function scrapHeadlines()
 				let items = [];
                 let $ = cheerio.load(body, {decodeEntities: false});
                 
+                
 
 				$('#main_container .col-left .mod').each((index, elem) =>
 				{
-					let headline = $(elem).find('.head >h3:contains("Tin chính")');
+					let headline = $(elem).find('.head >h3:contains("Trang Chủ")');
 					if (headline !== null && headline.text() !== "")
 					{
 						$(elem).find('.item').each((index, elem) =>
@@ -57,7 +64,7 @@ async function scrapHeadlines()
                                 Link: href,
                                 IsNew: isNew,
 								Date: date.text().split(': ')[1]
-							});
+                            });
 						});
 					}
 				});
@@ -76,7 +83,7 @@ async function scrapHeadlines()
 
 
 //  Tin sinh viên
-async function scrapStudentNews()
+async function scrapStudentNews(pageIndex)
 {
     try
     {
@@ -85,7 +92,11 @@ async function scrapStudentNews()
             request({
                 method: 'GET',
                 strictSSL: false,
-                url: 'https://sinhvien.bvu.edu.vn/'
+                url: 'https://sinhvien.bvu.edu.vn/News.aspx',
+                qs: {
+                    MenuID: 351,
+                    CurrentPage: pageIndex
+                }
             },
             (err, res, body) =>
             {
@@ -126,7 +137,9 @@ async function scrapStudentNews()
 								Date: date.text().split(': ')[1]
 							});
 						});
-					}
+                    }
+				console.log(items);
+                    
 				});
 
 
@@ -143,8 +156,8 @@ async function scrapStudentNews()
 
 
 
-(async ()=> {
-    var news = await scrapStudentNews();
-    console.log(news);
+// (async ()=> {
+//     var news = await scrapStudentNews();
+//     console.log(news);
     
-})();
+// })();

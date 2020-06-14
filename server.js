@@ -11,8 +11,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-const rootRoutes = require('./routes/root');
-app.use('/', rootRoutes);
+const mainRoutes = require('./routes/main');
+const studentRoutes = require('./routes/student');
+app.use('/main', mainRoutes);
+app.use('/student', studentRoutes);
 
 
 
@@ -20,3 +22,4 @@ app.listen(process.env.PORT, function () {
     console.log('\n\n"BVU News Getter" server listening on Port:', process.env.PORT);
 });
 
+ 
