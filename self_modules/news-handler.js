@@ -23,7 +23,7 @@ async function scrapHeadlines(pageIndex)
                     CurrentPage: pageIndex
                 }
             },
-            (err, res, body) =>
+            async(err, res, body) =>
             {
                 if (err || (res.statusCode !== 200))
                 {
@@ -33,8 +33,8 @@ async function scrapHeadlines(pageIndex)
 
 				let items = [];
                 let $ = cheerio.load(body, {decodeEntities: false});
-                
-                
+                items.push(await getPagingInfo(body));
+
 
 				$('#main_container .col-left .mod').each((index, elem) =>
 				{
@@ -98,7 +98,7 @@ async function scrapStudentNews(pageIndex)
                     CurrentPage: pageIndex
                 }
             },
-            (err, res, body) =>
+            async(err, res, body) =>
             {
                 if (err || (res.statusCode !== 200))
                 {
@@ -108,6 +108,7 @@ async function scrapStudentNews(pageIndex)
 
 				let items = [];
                 let $ = cheerio.load(body, {decodeEntities: false});
+                items.push(await getPagingInfo(body));
                 
 
 				$('#main_container .col-left .mod').each((index, elem) =>
@@ -138,8 +139,6 @@ async function scrapStudentNews(pageIndex)
 							});
 						});
                     }
-				console.log(items);
-                    
 				});
 
 
@@ -155,9 +154,27 @@ async function scrapStudentNews(pageIndex)
 }
 
 
+async function getPagingInfo(body) {
 
-// (async ()=> {
-//     var news = await scrapStudentNews();
-//     console.log(news);
-    
+    return new Promise((resolve, reject) => {
+        let $ = cheerio.load(body, {decodeEntities: false});
+
+        let previous = $('#pagination-flickr >li.previous >a').attr('href');
+        let next = $('#pagination-flickr >li.next >a').attr('href');
+        let active = $('#pagination-flickr >li.active').html();
+
+        return resolve({
+            previous: previous || null,
+            active: active || null,
+            next: next || null
+        });
+    });
+
+}
+
+
+
+// (async () => {
+//     var news = await scrapHeadlines(8);
+//     console.log(news[0]);
 // })();
