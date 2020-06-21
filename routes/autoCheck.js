@@ -7,7 +7,7 @@ module.exports = router;
 router.get('/', async(req, res) => {
 
     console.log('\nAutoCheck is Calling from CronJob...');
-    await AutoChecker.DoAutoCheckEntirePages();
+    await AutoChecker.DoAutoCheckEntireHeadlinesPages();
     await AutoChecker.DoAutoCheckEntireStudentPages();
     
     res.status(200).send('Ok');
