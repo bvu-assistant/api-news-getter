@@ -5,11 +5,11 @@ module.exports = router;
 
 
 router.post('/', async(req, res) => {
-
+    
+    res.status(200).send('Ok');
     console.log('\nAutoCheck is Calling from CronJob...');
     await AutoChecker.DoAutoCheckEntireHeadlinesPages();
     await AutoChecker.DoAutoCheckEntireStudentPages();
     
-    res.status(200).send('Ok');
 });
 
