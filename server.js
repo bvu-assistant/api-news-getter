@@ -27,3 +27,8 @@ app.listen(process.env.PORT, async function () {
     // const fsHandler = require('./self_modules/firestore_handler');
     // console.log(Array.from(await fsHandler.getNewsDocuments()).length);
 });
+
+
+app.get('/', function (req, res) {
+    res.status(200).send('News Getter server running Oke.');
+});
