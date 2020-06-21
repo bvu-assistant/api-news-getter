@@ -8,7 +8,7 @@ router.post('/', async(req, res) => {
 
     console.log('\nAutoCheck is Calling from CronJob...');
     await AutoChecker.DoAutoCheckEntireHeadlinesPages();
-    // await AutoChecker.DoAutoCheckEntireStudentPages();
+    await AutoChecker.DoAutoCheckEntireStudentPages();
     
     res.status(200).send('Ok');
 });

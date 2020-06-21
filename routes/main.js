@@ -5,6 +5,11 @@ module.exports = router;
 
 
 
+router.get('/', function (req, res) {
+    res.status(200).send('News Getter server running Oke.');
+});
+
+
 router.get('/page/:pageIndex', async(req, res) => {
     const pageIndex = req.params.pageIndex;
 
