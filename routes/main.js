@@ -10,7 +10,7 @@ router.get('/page/:pageIndex', async(req, res) => {
     const pageIndex = req.params.pageIndex;
 
     let articleList = await newsHandler.scrapHeadlines(pageIndex);
-    console.log(articleList);
+    // console.log(articleList);
     
     res.status(200).send(articleList);
 });

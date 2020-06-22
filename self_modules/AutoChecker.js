@@ -8,6 +8,10 @@ class AutoChecker {
         let headlines = await newsHandler.scrapHeadlines(1);
         let studentNews = await newsHandler.scrapStudentNews(1);
 
+        headlines.splice(0, 1)[0];
+        studentNews.splice(0, 1)[0];
+
+
         console.log(await fsHandler.addNews('news/details/headlines', headlines));
         console.log(await fsHandler.addNews('news/details/student', studentNews));
     }

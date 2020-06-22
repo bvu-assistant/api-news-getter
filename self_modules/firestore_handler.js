@@ -57,6 +57,24 @@ class FireStoreHandler {
         });
     }
 
+
+    async addSampleArticle() {
+        return new Promise((resolve, reject) => {
+            this.db.collection('news/details/headlines')
+                .doc('2821')
+                .set({
+                    Title: 'Title',
+                    Link: 'Link',
+                    Date: 'Date',
+                    IsNew: 'IsNew',
+                }).then(res => {
+                    console.log('Finished');
+                })
+                .catch(reason => {
+                    console.log(reason);
+                });
+        });
+    }
 }
 
 
