@@ -43,9 +43,9 @@ async function getDetailLinks(body) {
         return div;
     }
     else {
-
-        $(div).find('p a').each((index, elem) => {
-
+        links.push({'fullmessage': $(div).text()});
+        
+        $(div).find('a').each((index, elem) => {
             let fileUrl = $(elem).attr('href');
             let fileDescription = $(elem).text();
             
