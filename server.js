@@ -14,10 +14,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const mainRoutes = require('./routes/main');
 const studentRoutes = require('./routes/student');
 const autoCheckRoutes = require('./routes/autoCheck');
+const detailsRoutes = require('./routes/details');
 app.use('/main', mainRoutes);
 app.use('/student', studentRoutes);
 app.use('/autoCheck', autoCheckRoutes);
-
+app.use('/details', detailsRoutes);
 
 
 app.listen(process.env.PORT, async function () {
