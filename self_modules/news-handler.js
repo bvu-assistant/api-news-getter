@@ -60,6 +60,7 @@ async function scrapHeadlines(pageIndex)
 
 
 							items.push({
+                                Id: href.split('?NewsID=')[1],
 								Title: title.text(),
                                 Link: href,
                                 IsNew: isNew,
@@ -132,6 +133,7 @@ async function scrapStudentNews(pageIndex)
 
 
 							items.push({
+                                Id: href.split('?NewsID=')[1],
 								Title: title.text(),
                                 Link: href,
                                 IsNew: isNew,
@@ -176,5 +178,5 @@ async function getPagingInfo(body) {
 
 // (async () => {
 //     var news = await scrapHeadlines(8);
-//     console.log(news[0]);
+//     console.log(news);
 // })();

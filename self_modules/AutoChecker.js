@@ -67,3 +67,9 @@ class AutoChecker {
 }
 
 module.exports = AutoChecker;
+
+
+
+// (async function() {
+//     AutoChecker.DoAutoCheckEntireStudentPages();
+// })();

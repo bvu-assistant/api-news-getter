@@ -40,6 +40,7 @@ class FireStoreHandler {
                 await this.db.collection(path)
                     .doc(articles[i].Link.split('ID=')[1])
                     .set({
+                        Id: parseInt(articles[i].Id),
                         Title: articles[i].Title,
                         Link: articles[i].Link,
                         Date: articles[i].Date,
