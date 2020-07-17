@@ -2,7 +2,7 @@ class FireStore {
     
     constructor() {
         const admin = require('firebase-admin');
-        let serviceAccount = require('./bvuassistant-1585757109800-firebase-adminsdk-i7b3z-d4e46e1296.json');
+        let serviceAccount = require('./firebase_sdk_key.json');
 
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount)

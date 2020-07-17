@@ -1,5 +1,5 @@
 const AutoChecker = require('../self_modules/AutoChecker');
-const fsHandler = require('../self_modules/firestore_handler');
+const fsHandler = require('../self_modules/firebase/firestore_handler');
 const express = require('express');
 const router = express.Router();
 module.exports = router;

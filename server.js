@@ -1,8 +1,8 @@
 require('dotenv/config');
 
 const bodyParser = require('body-parser');
-const logger = require('morgan');
 const express = require('express');
+const logger = require('morgan');
 const app = express();
 
 app.use(logger('dev'));
@@ -11,22 +11,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-const mainRoutes = require('./routes/main');
-const studentRoutes = require('./routes/student');
-const autoCheckRoutes = require('./routes/autoCheck');
+const getRoutes = require('./routes/get');
 const detailsRoutes = require('./routes/details');
-app.use('/main', mainRoutes);
-app.use('/student', studentRoutes);
-app.use('/autoCheck', autoCheckRoutes);
+const autoCheckRoutes = require('./routes/autoCheck');
+app.use('/get',getRoutes);
 app.use('/details', detailsRoutes);
+app.use('/autoCheck', autoCheckRoutes);
+
 
 
 app.listen(process.env.PORT, async function () {
     console.log('"BVU News Getter" server listening on Port:', process.env.PORT);
-
-
-    // const fsHandler = require('./self_modules/firestore_handler');
-    // console.log(Array.from(await fsHandler.getNewsDocuments()).length);
+    console.log('Open the Browser on:', `http://localhost:${process.env.PORT}\n\n`);
 });
 
 

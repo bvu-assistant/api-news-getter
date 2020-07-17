@@ -32,11 +32,14 @@ class FireStoreHandler {
 
     async addNews(path, articles) {
         return new Promise( async(resolve, reject) => {
-            console.log(`Adding ${articles.length} articles to FireStore...`);
+            let len = articles.length;
+            let failedCounter = 0;
+            
+            console.log(`Adding ${len} articles to FireStore...`);
             console.log('Path: ' + path, '\n');
-            
-            
-            for (let i = 0; i < articles.length; i++) {
+        
+
+            for (let i = 0; i < len; i++) {
                 await this.db.collection(path)
                     .doc(articles[i].Link.split('ID=')[1])
                     .set({
@@ -47,14 +50,15 @@ class FireStoreHandler {
                         IsNew: articles[i].IsNew,
                     })
                     .then((res) => {
-                        console.log(`Finished ${i + 1}/${articles.length} [${articles[i].Link.split('ID=')[1]}].`);
+                        console.log(`Finished ${i + 1}/${len} [${articles[i].Link.split('ID=')[1]}].`);
                     })
                     .catch(reason => {
-                        console.log('Failed to add articles, reason:', reason, '\n');
+                        ++failedCounter;
+                        console.log(`Failed at: ${len}/${i}`);
                     });
             }
 
-            return resolve('Finish add news.\n\n');
+            return resolve(`Finish add news: ${len - failedCounter}/${len}.\n\n`);
         });
     }
 
