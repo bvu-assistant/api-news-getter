@@ -36,7 +36,7 @@ async function getDetails(articleId) {
 async function getDetailLinks(body) {
     let result = {
         fullMessage: '',
-        links: []
+        links: {}
     };
 
 
@@ -54,10 +54,10 @@ async function getDetailLinks(body) {
             let fileUrl = $(elem).attr('href');
             let fileDescription = $(elem).text();
             
-            let obj = {};
-            obj[fileDescription] = fileUrl;
+            // let obj = {};
+            // obj[fileDescription] = fileUrl;
 
-            result.links.push(obj);
+            result.links[fileDescription] = fileUrl;
         });
     }
     
