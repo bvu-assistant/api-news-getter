@@ -34,16 +34,21 @@ async function getDetails(articleId) {
 
 
 async function getDetailLinks(body) {
-    let links = [];
+    let result = {
+        fullMessage: '',
+        links: []
+    };
+
+
     let $ = cheerio.load(body, {decodeEntities: false});
-
-
     let div = $('#ctl00_ContentPlaceHolder_ContentID').html();
+
+
     if (div == 'Không tìm thấy thông tin.') {
         return div;
     }
     else {
-        links.push({'fullmessage': $(div).text()});
+        result.fullMessage = $(div).text();
         
         $(div).find('a').each((index, elem) => {
             let fileUrl = $(elem).attr('href');
@@ -52,10 +57,10 @@ async function getDetailLinks(body) {
             let obj = {};
             obj[fileDescription] = fileUrl;
 
-            links.push(obj);
+            result.links.push(obj);
         });
     }
     
 
-    return links;
+    return result;
 }
